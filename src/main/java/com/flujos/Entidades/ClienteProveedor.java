@@ -78,6 +78,6 @@ public class ClienteProveedor {
     public void setTipoClienteProveedor(String tipoClienteProveedor) {
         this.tipoClienteProveedor = tipoClienteProveedor;
     }   
-    
-    
+
+
 }
