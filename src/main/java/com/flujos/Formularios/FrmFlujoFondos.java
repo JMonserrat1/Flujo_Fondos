@@ -26,21 +26,60 @@ public class FrmFlujoFondos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menuBarPrincipal = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        menuItemABMClienteProveedor = new javax.swing.JMenuItem();
+        menuItemABMCuenta = new javax.swing.JMenuItem();
+        menuItemABMMovimiento = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema flujo de fondos");
+
+        jMenu2.setText("ABMs");
+
+        menuItemABMClienteProveedor.setText("Cliente/Proveedor");
+        menuItemABMClienteProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemABMClienteProveedorActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuItemABMClienteProveedor);
+
+        menuItemABMCuenta.setText("Cuenta");
+        jMenu2.add(menuItemABMCuenta);
+
+        menuItemABMMovimiento.setText("Movimiento");
+        menuItemABMMovimiento.setActionCommand("");
+        jMenu2.add(menuItemABMMovimiento);
+
+        menuBarPrincipal.add(jMenu2);
+
+        jMenu1.setText("File");
+        menuBarPrincipal.add(jMenu1);
+
+        setJMenuBar(menuBarPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 508, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 336, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuItemABMClienteProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemABMClienteProveedorActionPerformed
+        FrmABMClienteProveedor menuABMClienteProveedor = new FrmABMClienteProveedor();
+        menuABMClienteProveedor.setVisible(true);
+        menuABMClienteProveedor.setLocationRelativeTo(null);
+        
+    }//GEN-LAST:event_menuItemABMClienteProveedorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +117,11 @@ public class FrmFlujoFondos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar menuBarPrincipal;
+    private javax.swing.JMenuItem menuItemABMClienteProveedor;
+    private javax.swing.JMenuItem menuItemABMCuenta;
+    private javax.swing.JMenuItem menuItemABMMovimiento;
     // End of variables declaration//GEN-END:variables
 }

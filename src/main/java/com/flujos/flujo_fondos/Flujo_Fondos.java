@@ -4,6 +4,8 @@
 
 package com.flujos.flujo_fondos;
 
+import com.flujos.Formularios.FrmFlujoFondos;
+
 /**
  *
  * @author monse
@@ -11,6 +13,9 @@ package com.flujos.flujo_fondos;
 public class Flujo_Fondos {
 
     public static void main(String[] args) {
+        FrmFlujoFondos ventanaPrincipal = new FrmFlujoFondos();
+        ventanaPrincipal.setVisible(true);
+        ventanaPrincipal.setLocationRelativeTo(null);
         
     }
 }
