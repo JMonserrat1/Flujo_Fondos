@@ -4,7 +4,13 @@
  */
 package com.flujos.Formularios;
 
+import com.flujos.DAOs.DAOClienteProveedor;
+import com.flujos.Entidades.ClienteProveedor;
 import com.flujos.Utilidades.Conexion;
+import com.flujos.Utilidades.Utilidades;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -12,15 +18,19 @@ import com.flujos.Utilidades.Conexion;
  */
 public class FrmABMClienteProveedor extends javax.swing.JFrame {
 
+    private Conexion con;
+    private DAOClienteProveedor daoClienteProveedor;
+
     /**
      * Creates new form FrmABMClienteProveedor
      */
     public FrmABMClienteProveedor() {
         initComponents();
         inicializar();
-        
+
     }
-    private void inicializar(){
+
+    private void inicializar() {
         txtNombre.setText("");
         txtDNI.setText("");
         txtEmail.setText("");
@@ -30,7 +40,8 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
         btnModificar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnLimpiar.setEnabled(true);
-        
+        daoClienteProveedor = new DAOClienteProveedor();
+        con = new Conexion();
     }
 
     /**
@@ -71,7 +82,7 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
 
         lblNombre.setText("Nombre/Razon social: ");
 
-        comboTipoCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione tipo --", "Cliente", "Proveedor" }));
+        comboTipoCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "Cliente", "Proveedor" }));
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +193,75 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        
+        if (txtNombre.getText().equals("")) {
+            Utilidades.msg(null, "El nombre no puede estar vacio");
+            txtNombre.requestFocus();
+            return;
+        }
+
+        if (txtDNI.getText().equals("")) {
+            Utilidades.msg(null, "El DNI no puede estar vacio");
+            txtDNI.requestFocus();
+            return;
+        }
+        if (Utilidades.isNunInt(txtDNI.getText()) && !(Integer.parseInt(txtDNI.getText()) > 0)) {
+            Utilidades.msg(null, "DNI/CUIT incorrecto");
+            txtDNI.setText("");
+            txtDNI.requestFocus();
+            return;
+
+        }
+
+        if (txtTelefono.getText().equals("")) {
+            Utilidades.msg(null, "El Telefono no puede estar vacio");
+            txtTelefono.requestFocus();
+            return;
+        }
+
+        if (txtEmail.getText().equals("")) {
+            Utilidades.msg(null, "El Email no puede estar vacio");
+            txtEmail.requestFocus();
+            return;
+        }
+        if (comboTipoCliente.getSelectedItem().equals("--")) {
+            Utilidades.msg(null, "El tipo de cliente no puede estar vacio");
+            comboTipoCliente.requestFocus();
+            return;
+        }
+
+        if (Utilidades.existe(con.getConexion(), "SELECT (1) FROM cliente_proveedores WHERE dni_cuit = '" + txtDNI.getText() + "' ")) {
+
+            Utilidades.msg(null, "No se puede ingresar porque el DNI/CUIT ya existe");
+            txtNombre.setText("");
+            txtDNI.setText("");
+            txtEmail.setText("");
+            txtTelefono.setText("");
+            comboTipoCliente.setSelectedIndex(0);
+
+        } else {
+            try {
+                ClienteProveedor cliente = new ClienteProveedor();
+                cliente.setNomRazonSocial(txtNombre.getText());
+                cliente.setDniCuit(Integer.valueOf(txtDNI.getText()));
+                cliente.setTelefono(txtTelefono.getText());
+                cliente.setEmail(txtEmail.getText());
+                cliente.setTipoClienteProveedor(comboTipoCliente.getSelectedItem().toString());
+                daoClienteProveedor.ingresarClienteProveedor(cliente, con.getConexion());
+
+                Utilidades.msg(null, "Cliente/Proveedor ingresado correctamente");
+                txtNombre.setText("");
+                txtDNI.setText("");
+                txtEmail.setText("");
+                txtTelefono.setText("");
+                comboTipoCliente.setSelectedIndex(0);
+
+            } catch (SQLException ex) {
+                Utilidades.msg(null, "Error al ingresar el Cliente/Proveedor");
+                this.dispose();
+            }
+        }
+
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed

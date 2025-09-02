@@ -21,7 +21,7 @@ public class Conexion {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            String db = "jdbc:myqsl://localhost/flujofondos";
+            String db = "jdbc:mysql://localhost/flujofondos";
             conn = DriverManager.getConnection(db,"root","");
             
             
