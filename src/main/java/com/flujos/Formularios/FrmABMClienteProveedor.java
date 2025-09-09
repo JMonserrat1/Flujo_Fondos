@@ -11,6 +11,7 @@ import com.flujos.Utilidades.Utilidades;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,6 +36,7 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
         txtDNI.setText("");
         txtEmail.setText("");
         txtTelefono.setText("");
+        txtIdClienteProveedor.setVisible(false);
         comboTipoCliente.setSelectedIndex(0);
         btnAgregar.setEnabled(true);
         btnModificar.setEnabled(false);
@@ -68,6 +70,8 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
+        btnBuscarClienteProveedor = new javax.swing.JButton();
+        txtIdClienteProveedor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ABM Cliente/Proveedor");
@@ -99,8 +103,18 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
         });
 
         btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -109,17 +123,29 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
             }
         });
 
+        btnBuscarClienteProveedor.setText("Buscar");
+        btnBuscarClienteProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarClienteProveedorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(552, Short.MAX_VALUE)
-                .addComponent(btnSalir)
-                .addGap(12, 12, 12))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -134,16 +160,18 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
                             .addComponent(txtTelefono)
                             .addComponent(txtEmail)
                             .addComponent(comboTipoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnSalir)
+                                .addGap(12, 12, 12))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnBuscarClienteProveedor)
+                                .addGap(163, 163, 163)
+                                .addComponent(txtIdClienteProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28))))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAgregar, btnEliminar, btnLimpiar, btnModificar});
@@ -151,7 +179,11 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscarClienteProveedor)
+                    .addComponent(txtIdClienteProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -188,7 +220,14 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        try {
+            con.cerrarConexion();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al salir de la ventana, intente de nuevo.");
+            this.dispose();
+        }
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -269,8 +308,142 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
         txtDNI.setText("");
         txtEmail.setText("");
         txtTelefono.setText("");
+        txtIdClienteProveedor.setText("");
         comboTipoCliente.setSelectedIndex(0);
+
+        btnAgregar.setEnabled(true);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnBuscarClienteProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteProveedorActionPerformed
+
+        btnAgregar.setEnabled(false);
+        btnModificar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+
+        String dato = JOptionPane.showInputDialog("Dni/Cuit/Cuil: ");
+
+        if (dato != null && !dato.equals("") && Utilidades.isNunInt(dato) && Integer.parseInt(dato) > 0) {
+            Integer datoEntero = Integer.valueOf(dato);
+            ClienteProveedor clienteProveedor = daoClienteProveedor.obtenerDatos(datoEntero, con.getConexion());
+
+            if (clienteProveedor != null) {
+                txtDNI.setText(String.valueOf(clienteProveedor.getDniCuit()));
+                txtNombre.setText(clienteProveedor.getNomRazonSocial());
+                txtEmail.setText(clienteProveedor.getEmail());
+                txtTelefono.setText(clienteProveedor.getTelefono());
+                txtIdClienteProveedor.setText(String.valueOf(clienteProveedor.getIdClienteProveedor()));
+
+                comboTipoCliente.setSelectedItem(clienteProveedor.getTipoClienteProveedor());
+            } else {
+                Utilidades.msg(null, "No existe el Cliente/Proveedor o se produjo un error");
+                btnAgregar.setEnabled(true);
+                btnModificar.setEnabled(false);
+                btnEliminar.setEnabled(false);
+
+            }
+
+        } else {
+            Utilidades.msg(null, "Debe ingresar un número entero mayor a 0");
+            btnAgregar.setEnabled(true);
+            btnModificar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+
+        }
+
+    }//GEN-LAST:event_btnBuscarClienteProveedorActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+
+        try {
+            if (txtNombre.getText().equals("")) {
+                Utilidades.msg(null, "El nombre no puede estar vacio");
+                txtNombre.requestFocus();
+                return;
+            }
+
+            if (txtDNI.getText().equals("")) {
+                Utilidades.msg(null, "El DNI no puede estar vacio");
+                txtDNI.requestFocus();
+                return;
+            }
+            if (Utilidades.isNunInt(txtDNI.getText()) && !(Integer.parseInt(txtDNI.getText()) > 0)) {
+                Utilidades.msg(null, "DNI/CUIT incorrecto");
+                txtDNI.setText("");
+                txtDNI.requestFocus();
+                return;
+
+            }
+
+            if (txtTelefono.getText().equals("")) {
+                Utilidades.msg(null, "El Telefono no puede estar vacio");
+                txtTelefono.requestFocus();
+                return;
+            }
+
+            if (txtEmail.getText().equals("")) {
+                Utilidades.msg(null, "El Email no puede estar vacio");
+                txtEmail.requestFocus();
+                return;
+            }
+            if (comboTipoCliente.getSelectedItem().equals("--")) {
+                Utilidades.msg(null, "El tipo de cliente no puede estar vacio");
+                comboTipoCliente.requestFocus();
+                return;
+            }
+
+            ClienteProveedor clienteProveedor = new ClienteProveedor();
+
+            clienteProveedor.setIdClienteProveedor(Long.valueOf(txtIdClienteProveedor.getText()));
+            clienteProveedor.setDniCuit(Integer.valueOf(txtDNI.getText()));
+            clienteProveedor.setEmail(txtEmail.getText());
+            clienteProveedor.setNomRazonSocial(txtNombre.getText());
+            clienteProveedor.setTelefono(txtTelefono.getText());
+            clienteProveedor.setTipoClienteProveedor(comboTipoCliente.getSelectedItem().toString());
+
+            daoClienteProveedor.actualizar(clienteProveedor, con.getConexion());
+            Utilidades.msg(null, "ClienteProveedor actualizado corrrectamente");
+            txtNombre.setText("");
+            txtDNI.setText("");
+            txtEmail.setText("");
+            txtTelefono.setText("");
+            txtIdClienteProveedor.setText("");
+            comboTipoCliente.setSelectedIndex(0);
+
+            btnAgregar.setEnabled(true);
+            btnModificar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+        } catch (SQLException ex) {
+
+            Utilidades.msg(null, "Se produjo un error al actualizar el cliente/proveedor");
+
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        try {
+            daoClienteProveedor.eliminar(Long.valueOf(txtIdClienteProveedor.getText()), con.getConexion());
+            Utilidades.msg(null, "Se elimino el cliente/proveedor correctamente");
+            
+            txtNombre.setText("");
+            txtDNI.setText("");
+            txtEmail.setText("");
+            txtTelefono.setText("");
+            txtIdClienteProveedor.setText("");
+            comboTipoCliente.setSelectedIndex(0);
+            
+            btnAgregar.setEnabled(true);
+            btnModificar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+        } catch (SQLException ex) {
+            Utilidades.msg(null, "No se pudo eliminar el cliente/proveedor, intente nuevamente");
+            this.dispose();
+        }
+
+
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,6 +482,7 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnBuscarClienteProveedor;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
@@ -321,6 +495,7 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
     private javax.swing.JLabel lblTipo;
     private javax.swing.JTextField txtDNI;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtIdClienteProveedor;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables

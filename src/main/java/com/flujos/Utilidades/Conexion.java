@@ -21,7 +21,7 @@ public class Conexion {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            String db = "jdbc:mysql://localhost/flujofondos";
+            String db = "jdbc:mysql://localhost/flujo_fondos";
             conn = DriverManager.getConnection(db,"root","");
             
             
@@ -42,5 +42,9 @@ public class Conexion {
         conn.close();
         conn = null;
         return conn;       
+    }
+
+    public void close() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
