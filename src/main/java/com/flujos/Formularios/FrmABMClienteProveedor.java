@@ -65,13 +65,13 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
         txtTelefono = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         comboTipoCliente = new javax.swing.JComboBox<>();
+        btnBuscarClienteProveedor = new javax.swing.JButton();
+        txtIdClienteProveedor = new javax.swing.JTextField();
         btnSalir = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        btnBuscarClienteProveedor = new javax.swing.JButton();
-        txtIdClienteProveedor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ABM Cliente/Proveedor");
@@ -87,6 +87,13 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
         lblNombre.setText("Nombre/Razon social: ");
 
         comboTipoCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "Cliente", "Proveedor" }));
+
+        btnBuscarClienteProveedor.setText("Buscar");
+        btnBuscarClienteProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarClienteProveedorActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -123,63 +130,49 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
             }
         });
 
-        btnBuscarClienteProveedor.setText("Buscar");
-        btnBuscarClienteProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarClienteProveedorActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(306, Short.MAX_VALUE)
+                .addComponent(btnBuscarClienteProveedor)
+                .addGap(163, 163, 163)
+                .addComponent(txtIdClienteProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
+                .addGap(114, 114, 114)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblDNI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNombre)
+                    .addComponent(txtDNI)
+                    .addComponent(txtTelefono)
+                    .addComponent(txtEmail)
+                    .addComponent(comboTipoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(183, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblDNI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNombre)
-                            .addComponent(txtDNI)
-                            .addComponent(txtTelefono)
-                            .addComponent(txtEmail)
-                            .addComponent(comboTipoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnSalir)
-                                .addGap(12, 12, 12))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnBuscarClienteProveedor)
-                                .addGap(163, 163, 163)
-                                .addComponent(txtIdClienteProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28))))))
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAgregar, btnEliminar, btnLimpiar, btnModificar});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscarClienteProveedor)
                     .addComponent(txtIdClienteProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -206,20 +199,56 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
                     .addComponent(comboTipoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar)
-                    .addComponent(btnModificar)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnLimpiar))
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(btnSalir)
+                .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAgregar, btnEliminar, btnLimpiar, btnModificar});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
+    private void btnBuscarClienteProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteProveedorActionPerformed
+
+        btnAgregar.setEnabled(false);
+        btnModificar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+
+        String dato = JOptionPane.showInputDialog("Dni/Cuit/Cuil: ");
+
+        if (dato != null && !dato.equals("") && Utilidades.isNunInt(dato) && Integer.parseInt(dato) > 0) {
+            Integer datoEntero = Integer.valueOf(dato);
+            ClienteProveedor clienteProveedor = daoClienteProveedor.obtenerDatos(datoEntero, con.getConexion());
+
+            if (clienteProveedor != null) {
+                txtDNI.setText(String.valueOf(clienteProveedor.getDniCuit()));
+                txtNombre.setText(clienteProveedor.getNomRazonSocial());
+                txtEmail.setText(clienteProveedor.getEmail());
+                txtTelefono.setText(clienteProveedor.getTelefono());
+                txtIdClienteProveedor.setText(String.valueOf(clienteProveedor.getIdClienteProveedor()));
+
+                comboTipoCliente.setSelectedItem(clienteProveedor.getTipoClienteProveedor());
+            } else {
+                Utilidades.msg(null, "No existe el Cliente/Proveedor o se produjo un error");
+                btnAgregar.setEnabled(true);
+                btnModificar.setEnabled(false);
+                btnEliminar.setEnabled(false);
+
+            }
+
+        } else {
+            Utilidades.msg(null, "Debe ingresar un número entero mayor a 0");
+            btnAgregar.setEnabled(true);
+            btnModificar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+
+        }
+
+    }//GEN-LAST:event_btnBuscarClienteProveedorActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         try {
@@ -299,60 +328,7 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
                 this.dispose();
             }
         }
-
-
     }//GEN-LAST:event_btnAgregarActionPerformed
-
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        txtNombre.setText("");
-        txtDNI.setText("");
-        txtEmail.setText("");
-        txtTelefono.setText("");
-        txtIdClienteProveedor.setText("");
-        comboTipoCliente.setSelectedIndex(0);
-
-        btnAgregar.setEnabled(true);
-        btnModificar.setEnabled(false);
-        btnEliminar.setEnabled(false);
-    }//GEN-LAST:event_btnLimpiarActionPerformed
-
-    private void btnBuscarClienteProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteProveedorActionPerformed
-
-        btnAgregar.setEnabled(false);
-        btnModificar.setEnabled(true);
-        btnEliminar.setEnabled(true);
-
-        String dato = JOptionPane.showInputDialog("Dni/Cuit/Cuil: ");
-
-        if (dato != null && !dato.equals("") && Utilidades.isNunInt(dato) && Integer.parseInt(dato) > 0) {
-            Integer datoEntero = Integer.valueOf(dato);
-            ClienteProveedor clienteProveedor = daoClienteProveedor.obtenerDatos(datoEntero, con.getConexion());
-
-            if (clienteProveedor != null) {
-                txtDNI.setText(String.valueOf(clienteProveedor.getDniCuit()));
-                txtNombre.setText(clienteProveedor.getNomRazonSocial());
-                txtEmail.setText(clienteProveedor.getEmail());
-                txtTelefono.setText(clienteProveedor.getTelefono());
-                txtIdClienteProveedor.setText(String.valueOf(clienteProveedor.getIdClienteProveedor()));
-
-                comboTipoCliente.setSelectedItem(clienteProveedor.getTipoClienteProveedor());
-            } else {
-                Utilidades.msg(null, "No existe el Cliente/Proveedor o se produjo un error");
-                btnAgregar.setEnabled(true);
-                btnModificar.setEnabled(false);
-                btnEliminar.setEnabled(false);
-
-            }
-
-        } else {
-            Utilidades.msg(null, "Debe ingresar un número entero mayor a 0");
-            btnAgregar.setEnabled(true);
-            btnModificar.setEnabled(false);
-            btnEliminar.setEnabled(false);
-
-        }
-
-    }//GEN-LAST:event_btnBuscarClienteProveedorActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 
@@ -426,14 +402,14 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
         try {
             daoClienteProveedor.eliminar(Long.valueOf(txtIdClienteProveedor.getText()), con.getConexion());
             Utilidades.msg(null, "Se elimino el cliente/proveedor correctamente");
-            
+
             txtNombre.setText("");
             txtDNI.setText("");
             txtEmail.setText("");
             txtTelefono.setText("");
             txtIdClienteProveedor.setText("");
             comboTipoCliente.setSelectedIndex(0);
-            
+
             btnAgregar.setEnabled(true);
             btnModificar.setEnabled(false);
             btnEliminar.setEnabled(false);
@@ -441,9 +417,20 @@ public class FrmABMClienteProveedor extends javax.swing.JFrame {
             Utilidades.msg(null, "No se pudo eliminar el cliente/proveedor, intente nuevamente");
             this.dispose();
         }
-
-
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtNombre.setText("");
+        txtDNI.setText("");
+        txtEmail.setText("");
+        txtTelefono.setText("");
+        txtIdClienteProveedor.setText("");
+        comboTipoCliente.setSelectedIndex(0);
+
+        btnAgregar.setEnabled(true);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments

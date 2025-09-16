@@ -4,17 +4,43 @@
  */
 package com.flujos.Formularios;
 
+import com.flujos.DAOs.DAOClienteProveedor;
+import com.flujos.Entidades.Cuenta;
+import com.flujos.Utilidades.Conexion;
+import com.flujos.Utilidades.Utilidades;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author monse
  */
 public class FrmABMCuentas extends javax.swing.JFrame {
 
+    
+    
+    private Conexion con;
     /**
      * Creates new form FrmABMCuentas
      */
     public FrmABMCuentas() {
         initComponents();
+        inicializar();
+    }
+
+    
+       private void inicializar() {
+        txtIdcuenta.setText("");
+        txtCodigo.setText("");
+        txtConcepto.setText("");
+        comboClasificacion.setSelectedIndex(0);
+        comboIngresoegreso.setSelectedIndex(0);
+        btnAgregar.setEnabled(true);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnLimpiar.setEnabled(true);
+        daoCuenta = new DAOCuenta();
+        
+        con = new Conexion();
     }
 
     /**
@@ -26,21 +52,336 @@ public class FrmABMCuentas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblCodigo = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
+        lblConcepto = new javax.swing.JLabel();
+        txtConcepto = new javax.swing.JTextField();
+        lblClasificacion = new javax.swing.JLabel();
+        comboClasificacion = new javax.swing.JComboBox<>();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnBuscarClienteProveedor = new javax.swing.JButton();
+        txtIdcuenta = new javax.swing.JTextField();
+        lblIngresoegreso = new javax.swing.JLabel();
+        comboIngresoegreso = new javax.swing.JComboBox<>();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblCodigo.setText("Codigo");
+
+        lblConcepto.setText("Concepto");
+
+        lblClasificacion.setText("Clasificacion");
+
+        comboClasificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "Operativo", "Inversion", "Financiacion" }));
+
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+
+        btnBuscarClienteProveedor.setText("Buscar");
+        btnBuscarClienteProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarClienteProveedorActionPerformed(evt);
+            }
+        });
+
+        lblIngresoegreso.setText("Ingreso / Egreso");
+
+        comboIngresoegreso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "Ingreso", "Egreso" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(lblConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(txtConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(300, 300, 300)
+                        .addComponent(btnBuscarClienteProveedor)
+                        .addGap(163, 163, 163)
+                        .addComponent(txtIdcuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblIngresoegreso, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(lblClasificacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(comboClasificacion, 0, 220, Short.MAX_VALUE)
+                            .addComponent(comboIngresoegreso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBuscarClienteProveedor)
+                    .addComponent(txtIdcuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblIngresoegreso)
+                    .addComponent(comboIngresoegreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAgregar)
+                    .addComponent(btnModificar)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnLimpiar))
+                .addGap(18, 18, 18)
+                .addComponent(btnSalir))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+
+        try {
+            if (txtCodigo.getText().equals("")) {
+                Utilidades.msg(null, "El codigo no puede estar vacio");
+                txtCodigo.requestFocus();
+                return;
+            }
+
+            if (txtConcepto.getText().equals("")) {
+                Utilidades.msg(null, "El concepto no puede estar vacio");
+                txtConcepto.requestFocus();
+                return;
+            }
+            
+            if (comboClasificacion.getSelectedItem().equals("--")) {
+                Utilidades.msg(null, "La clasificacion no puede estar vacia");
+                comboClasificacion.requestFocus();
+                return;
+            }
+            
+            if (comboIngresoegreso.getSelectedItem().equals("--")) {
+                Utilidades.msg(null, "El ingreso/egreso no puede estar vacio");
+                comboIngresoegreso.requestFocus();
+                return;
+            }
+
+            Cuenta cuenta = new Cuenta();
+
+            cuenta.setCodConcepto(txtCodigo.getText());
+            cuenta.setNombreConcepto(txtConcepto.getText());
+            cuenta.setClaseConcepto(comboClasificacion.getSelectedItem().toString());
+            cuenta.setIngreso(comboIngresoegreso.getSelectedItem().toString());
+
+            daoCuenta.actualizar(cuenta, con.getConexion());
+            Utilidades.msg(null, "Cuentas actualizado corrrectamente");
+            txtCodigo.setText("");
+            txtConcepto.setText("");
+            comboClasificacion.setSelectedIndex(0);
+
+            btnAgregar.setEnabled(true);
+            btnModificar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+        } catch (SQLException ex) {
+
+            Utilidades.msg(null, "Se produjo un error al actualizar cuentas");
+
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        try {
+            daoCuenta.eliminar(Long.valueOf(txtCodigo.getText()), con.getConexion());
+            Utilidades.msg(null, "Se elimino el codigo correctamente");
+
+            txtCodigo.setText("");
+            txtConcepto.setText("");
+            comboClasificacion.setSelectedIndex(0);
+            comboIngresoegreso.setSelectedIndex(0);
+
+            btnAgregar.setEnabled(true);
+            btnModificar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+        } catch (SQLException ex) {
+            Utilidades.msg(null, "No se pudo eliminar el codigo, intente nuevamente");
+            this.dispose();
+        }
+
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtCodigo.setText("");
+        txtConcepto.setText("");
+        comboClasificacion.setSelectedIndex(0);
+        comboIngresoegreso.setSelectedIndex(0);
+
+        btnAgregar.setEnabled(true);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        try {
+            con.cerrarConexion();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al salir de la ventana, intente de nuevo.");
+            this.dispose();
+        }
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        if (txtCodigo.getText().equals("")) {
+            Utilidades.msg(null, "El codigo no puede estar vacio");
+            txtCodigo.requestFocus();
+            return;
+        }
+
+        if (txtConcepto.getText().equals("")) {
+            Utilidades.msg(null, "El concepto no puede estar vacio");
+            txtConcepto.requestFocus();
+            return;
+        }
+        
+        if (comboClasificacion.getSelectedItem().equals("--")) {
+            Utilidades.msg(null, "La clasificacion no puede estar vacia");
+            comboClasificacion.requestFocus();
+            return;
+        }
+        if (comboIngresoegreso.getSelectedItem().equals("--")) {
+            Utilidades.msg(null, "El ingreso/egreso no puede estar vacio");
+            comboIngresoegreso.requestFocus();
+            return;
+        }
+        
+        
+        if (Utilidades.existe(con.getConexion(), "SELECT (1) FROM cuentas WHERE cod_concepto = '" + txtCodigo.getText() + "' ")) {
+
+            Utilidades.msg(null, "No se puede ingresar porque el codigo ya existe");
+            txtCodigo.setText("");
+            txtConcepto.setText("");
+            comboClasificacion.setSelectedIndex(0);
+            comboIngresoegreso.setSelectedIndex(0);
+
+
+        } else {
+            try {
+                Cuenta cuenta = new Cuenta();
+                cuenta.setCodConcepto(txtCodigo.getText());
+                cuenta.setNombreConcepto(txtConcepto.getText());
+                cuenta.setClaseConcepto(comboClasificacion.getSelectedItem().toString());
+                cuenta.setIngreso(comboIngresoegreso.getSelectedItem().toString());
+
+                daoClienteProveedor.ingresarClienteProveedor(cliente, con.getConexion());
+
+                Utilidades.msg(null, "Concepto ingresado correctamente");
+                txtCodigo.setText("");
+                txtConcepto.setText("");
+                comboClasificacion.setSelectedIndex(0);
+                comboIngresoegreso.setSelectedIndex(0);
+
+            } catch (SQLException ex) {
+                Utilidades.msg(null, "Error al ingresar el Cliente/Proveedor");
+                this.dispose();
+            }
+        }
+
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnBuscarClienteProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteProveedorActionPerformed
+
+        btnAgregar.setEnabled(false);
+        btnModificar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+
+        String dato = JOptionPane.showInputDialog("Concepto: ");
+
+        if (dato != null && !dato.equals("")){
+            Cuenta cuenta = daoCuenta.obtenerDatos(datoString, con.getConexion());
+
+            if (Cuenta != null) {
+                txtCodigo.setText(String.valueOf(cuentas.getCodigo()));
+                txtConcepto.setText(cuenta.getConcepto());
+                comboClasificacion.setSelectedItem(cuenta.getClasificacion());
+                comboIngresoegreso.setSelectedItem(cuenta.getIngresoegreso());
+
+
+            } else 
+                Utilidades.msg(null, "No existe concepto o se produjo un error");
+                btnAgregar.setEnabled(true);
+                btnModificar.setEnabled(false);
+                btnEliminar.setEnabled(false);
+
+            }
+
+        } 
+    }//GEN-LAST:event_btnBuscarClienteProveedorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +419,20 @@ public class FrmABMCuentas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnBuscarClienteProveedor;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> comboClasificacion;
+    private javax.swing.JComboBox<String> comboIngresoegreso;
+    private javax.swing.JLabel lblClasificacion;
+    private javax.swing.JLabel lblCodigo;
+    private javax.swing.JLabel lblConcepto;
+    private javax.swing.JLabel lblIngresoegreso;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtConcepto;
+    private javax.swing.JTextField txtIdcuenta;
     // End of variables declaration//GEN-END:variables
 }
