@@ -36,6 +36,14 @@ public class Movimiento {
     public void setDescripcionMovimiento(String descripcionMovimiento) {
         this.descripcionMovimiento = descripcionMovimiento;
     }
+
+    public String getDescMovimiento() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setDescripcion(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
 }

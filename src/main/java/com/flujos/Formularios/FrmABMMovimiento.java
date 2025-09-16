@@ -4,18 +4,43 @@
  */
 package com.flujos.Formularios;
 
+import com.flujos.DAOs.DAOMovimiento;
+import com.flujos.Entidades.Movimiento;
+import com.flujos.Utilidades.Conexion;
+import com.flujos.Utilidades.Utilidades;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author monse
  */
 public class FrmABMMovimiento extends javax.swing.JFrame {
 
+    private Conexion con;
+    private DAOMovimiento daoMovimiento;
+    private String string;
+    private Movimiento Movimiento;
+
     /**
      * Creates new form FrmABMMovimiento
      */
     public FrmABMMovimiento() {
         initComponents();
+        inicializar();
     }
+
+    private void inicializar() {
+            txtDescripcion.setText("");
+
+            btnAgregar.setEnabled(true);
+            btnModificar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+            btnLimpiar.setEnabled(true);
+
+            daoMovimiento = new DAOMovimiento();
+            con = new Conexion();
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,21 +51,243 @@ public class FrmABMMovimiento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtDescripcion = new javax.swing.JTextField();
+        lblDescripcion = new javax.swing.JLabel();
+        btnBuscarMovimiento = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        txtIdMovimiento = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblDescripcion.setText("Descripcion");
+
+        btnBuscarMovimiento.setText("Buscar");
+        btnBuscarMovimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarMovimientoActionPerformed(evt);
+            }
+        });
+
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnBuscarMovimiento)
+                                .addGap(154, 154, 154)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIdMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(247, 247, 247))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(184, 184, 184))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(txtIdMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(btnBuscarMovimiento)
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregar)
+                    .addComponent(btnModificar)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnLimpiar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSalir)
+                .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMovimientoActionPerformed
+
+        btnAgregar.setEnabled(false);
+        btnModificar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+
+        String dato = JOptionPane.showInputDialog("Descripcion: ");
+
+        if (dato != null && !dato.equals("")){
+            Movimiento movimiento = daoMovimiento.obtenerDatos(dato, con.getConexion());
+
+            if (movimiento != null) {
+                txtDescripcion.setText(String.valueOf(movimiento.getDescMovimiento()));
+
+            } else {
+                Utilidades.msg(null, "No existe ese movimiento o se produjo un error");
+                btnAgregar.setEnabled(true);
+                btnModificar.setEnabled(false);
+                btnEliminar.setEnabled(false);
+            }
+
+        } else {
+
+            Utilidades.msg(null, "Debe ingresar un movimiento valido");
+            btnAgregar.setEnabled(true);
+            btnModificar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+
+        }
+    }//GEN-LAST:event_btnBuscarMovimientoActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        try {
+            con.cerrarConexion();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al salir de la ventana, intente de nuevo.");
+            this.dispose();
+        }
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        
+    if (txtDescripcion.getText().equals("")) {
+            Utilidades.msg(null, "La descripcion no puede estar vacia");
+            txtDescripcion.requestFocus();
+
+        } else {
+            try {
+                Movimiento movimiento = new Movimiento();
+                movimiento.setDescripcion(txtDescripcion.getText());
+                daoMovimiento.ingresarMovimiento(Movimiento, con.getConexion());
+
+                Utilidades.msg(null, "Descripcion de movimiento ingresado correctamente");
+                txtDescripcion.setText("");
+
+            } catch (SQLException ex) {
+                Utilidades.msg(null, "Error al ingresar descripcion de movimiento");
+                this.dispose();
+            }
+        }
+
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+
+        try {
+            if (txtDescripcion.getText().equals("")) {
+                Utilidades.msg(null, "La descripcion de movimiento no puede estar vacia");
+                txtDescripcion.requestFocus();
+                return;
+            }
+
+
+            Movimiento movimiento = new Movimiento();
+
+            movimiento.setIdMovimiento(Long.valueOf(txtIdMovimiento.getText()));
+            movimiento.setDescripcion(txtDescripcion.getText());
+
+            daoMovimiento.actualizar(movimiento, con.getConexion());
+            Utilidades.msg(null, "Movimiento actualizado corrrectamente");
+            txtDescripcion.setText("");
+
+            btnAgregar.setEnabled(true);
+            btnModificar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+
+        } catch (SQLException ex) {
+
+            Utilidades.msg(null, "Se produjo un error al actualizar la descripcion del movimiento");
+
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        try {
+            daoMovimiento.eliminar(Long.valueOf(txtIdMovimiento.getText()), con.getConexion());
+            Utilidades.msg(null, "Se elimino el movimiento correctamente");
+
+            txtDescripcion.setText("");
+
+            btnAgregar.setEnabled(true);
+            btnModificar.setEnabled(false);
+            btnEliminar.setEnabled(false);
+
+        } catch (SQLException ex) {
+            Utilidades.msg(null, "No se pudo eliminar el movimiento, intente nuevamente");
+            this.dispose();
+        }
+
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtDescripcion.setText("");
+
+        btnAgregar.setEnabled(true);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +325,14 @@ public class FrmABMMovimiento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnBuscarMovimiento;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel lblDescripcion;
+    private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtIdMovimiento;
     // End of variables declaration//GEN-END:variables
 }
