@@ -31,6 +31,7 @@ public class FrmFlujoFondos extends javax.swing.JFrame {
         menuItemABMClienteProveedor = new javax.swing.JMenuItem();
         menuItemABMCuenta = new javax.swing.JMenuItem();
         menuItemABMMovimiento = new javax.swing.JMenuItem();
+        menuItemCheque = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,6 +53,14 @@ public class FrmFlujoFondos extends javax.swing.JFrame {
         menuItemABMMovimiento.setText("Movimiento");
         menuItemABMMovimiento.setActionCommand("");
         jMenu2.add(menuItemABMMovimiento);
+
+        menuItemCheque.setText("Cheque");
+        menuItemCheque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemChequeActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuItemCheque);
 
         menuBarPrincipal.add(jMenu2);
 
@@ -80,6 +89,12 @@ public class FrmFlujoFondos extends javax.swing.JFrame {
         menuABMClienteProveedor.setLocationRelativeTo(null);
         
     }//GEN-LAST:event_menuItemABMClienteProveedorActionPerformed
+
+    private void menuItemChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemChequeActionPerformed
+        FrmCheques menuCheque = new FrmCheques();
+        menuCheque.setVisible(true);
+        menuCheque.setLocationRelativeTo(null);
+    }//GEN-LAST:event_menuItemChequeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,5 +138,6 @@ public class FrmFlujoFondos extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemABMClienteProveedor;
     private javax.swing.JMenuItem menuItemABMCuenta;
     private javax.swing.JMenuItem menuItemABMMovimiento;
+    private javax.swing.JMenuItem menuItemCheque;
     // End of variables declaration//GEN-END:variables
 }

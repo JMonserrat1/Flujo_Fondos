@@ -41,6 +41,9 @@ public class DAOClienteProveedor {
         }
     }
 
+    
+    
+    
     public ClienteProveedor obtenerDatos(Integer dniCuitCuil, Connection con) {
 
         Statement st = null;
@@ -90,6 +93,9 @@ public class DAOClienteProveedor {
         return clienteProveedor;
 
     }
+    
+    
+    
 
     public void actualizar(ClienteProveedor clienteProveedor, Connection con) throws SQLException {
         
@@ -121,6 +127,8 @@ public class DAOClienteProveedor {
         }
 
     }
+    
+    
     
     public void eliminar(Long id, Connection con) throws SQLException{
     
