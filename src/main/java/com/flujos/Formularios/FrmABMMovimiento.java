@@ -180,7 +180,7 @@ public class FrmABMMovimiento extends javax.swing.JFrame {
             Movimiento movimiento = daoMovimiento.obtenerDatos(dato, con.getConexion());
 
             if (movimiento != null) {
-                txtDescripcion.setText(String.valueOf(movimiento.getDescMovimiento()));
+                txtDescripcion.setText(String.valueOf(movimiento.getDescripcionMovimiento()));
 
             } else {
                 Utilidades.msg(null, "No existe ese movimiento o se produjo un error");
@@ -218,7 +218,7 @@ public class FrmABMMovimiento extends javax.swing.JFrame {
         } else {
             try {
                 Movimiento movimiento = new Movimiento();
-                movimiento.setDescripcion(txtDescripcion.getText());
+                movimiento.setDescripcionMovimiento(txtDescripcion.getText());
                 daoMovimiento.ingresarMovimiento(Movimiento, con.getConexion());
 
                 Utilidades.msg(null, "Descripcion de movimiento ingresado correctamente");
@@ -245,7 +245,7 @@ public class FrmABMMovimiento extends javax.swing.JFrame {
             Movimiento movimiento = new Movimiento();
 
             movimiento.setIdMovimiento(Long.valueOf(txtIdMovimiento.getText()));
-            movimiento.setDescripcion(txtDescripcion.getText());
+            movimiento.setDescripcionMovimiento(txtDescripcion.getText());
 
             daoMovimiento.actualizar(movimiento, con.getConexion());
             Utilidades.msg(null, "Movimiento actualizado corrrectamente");
@@ -317,10 +317,8 @@ public class FrmABMMovimiento extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmABMMovimiento().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new FrmABMMovimiento().setVisible(true);
         });
     }
 

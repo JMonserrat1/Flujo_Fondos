@@ -20,7 +20,7 @@ public class DAOMovimiento {
     public void ingresarMovimiento(Movimiento movimiento, Connection conn) throws SQLException {
         String sqlInsert = "INSERT INTO movimiento (desc_movimiento) VALUES (?) ";
         try (PreparedStatement ps = conn.prepareStatement(sqlInsert)) {
-            ps.setString(1, movimiento.getDescMovimiento());
+            ps.setString(1, movimiento.getDescripcionMovimiento());
             ps.executeUpdate();
         }    
     }
@@ -32,14 +32,14 @@ public class DAOMovimiento {
         Movimiento movimiento = new Movimiento();
 
         try {
-            String consulta = "SELECT * FROM movimiento WHERE desc_movimiento LIKE %descripcion%";
+            String consulta = "SELECT * FROM movimiento WHERE desc_movimiento LIKE '%"+descripcion+"%'";
 
             st = con.createStatement();
             rs = st.executeQuery(consulta);
 
             if (rs.next()) {
 
-                movimiento.setDescripcion(rs.getString("desc_movimiento"));
+                movimiento.setDescripcionMovimiento(rs.getString("desc_movimiento"));
             } else {
 
                 movimiento = null;
@@ -75,7 +75,7 @@ public class DAOMovimiento {
             String sqlUpdate = "UPDATE movimiento SET " + "desc_movimiento = ?, ";
 
             ps = con.prepareStatement(sqlUpdate);
-            ps.setString(1, movimiento.getDescMovimiento());
+            ps.setString(1, movimiento.getDescripcionMovimiento());
             ps.executeUpdate();
         } finally{
         
