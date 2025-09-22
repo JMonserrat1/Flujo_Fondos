@@ -1,13 +1,15 @@
-package com.flujos.Formularios;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+package com.flujos.Formularios;
+
 import com.flujos.DAOs.DAOCheque;
 import com.flujos.Entidades.Cheque;
 import com.flujos.Utilidades.Conexion;
 import com.flujos.Utilidades.Utilidades;
+import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.Date;
 
 /**
@@ -18,8 +20,7 @@ public class FrmCheques extends javax.swing.JFrame {
 
     private Conexion con;
     private DAOCheque daoCheque;
-    
-    
+
     /**
      * Creates new form FrmCheques
      */
@@ -27,9 +28,9 @@ public class FrmCheques extends javax.swing.JFrame {
         initComponents();
         inicializar();
     }
-    
+
     private void inicializar() {
-        
+
         TxtNumero.setText("");
         TxtImporteCheque.setText("");
         jDateFechaCobro.setDate(new Date());
@@ -40,11 +41,8 @@ public class FrmCheques extends javax.swing.JFrame {
         jComboTitularCheque.setSelectedIndex(0);
         jComboTitularDestino.setSelectedIndex(0);
         TxtUsoCheque.setText("");
-                
+
     }
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -291,7 +289,7 @@ public class FrmCheques extends javax.swing.JFrame {
             return;
         }
 
-        if (Utilidades.existe(con.getConexion(), "SELECT (1) FROM cheque WHERE nro_cheque = " + Integer.parseInt(TxtNumero.getText())  + " ")) {
+        if (Utilidades.existe(con.getConexion(), "SELECT (1) FROM cheque WHERE nro_cheque = " + Integer.parseInt(TxtNumero.getText()) + " ")) {
             Utilidades.msg(null, "No se puede ingresar porque el numero de cheque ya existe");
             TxtNumero.setText("");
             TxtIdCheque.setText("");
@@ -318,24 +316,25 @@ public class FrmCheques extends javax.swing.JFrame {
                 //cheque.setTitularCheque(Long.parseLong(TxtTitularCheque.getText()));
                 //cheque.setTitularDestino(Long.parseLong(TxtTitularDestino.getText()));
                 cheque.setUsoCheque(TxtUsoCheque.getText());
-                
-                daoClienteProveedor.ingresarClienteProveedor(cliente, con.getConexion());
-                Utilidades.msg(null, "Cliente/Proveedor ingresado correctamente");
-                txtNombre.setText("");
-                txtDNI.setText("");
-                txtEmail.setText("");
-                txtTelefono.setText("");
-                comboTipoCliente.setSelectedIndex(0);
+
+                daoCheque.ingresarCheque(cheque, con.getConexion());
+                Utilidades.msg(null, "Cheque ingresado correctamente");
+                TxtNumero.setText("");
+                TxtImporteCheque.setText("");
+                jDateFechaCobro.setDate(new Date());
+                jComboTipoCheque.setSelectedIndex(0);
+                jComboEstadoCheque.setSelectedIndex(0);
+                TxtObservacionCheque.setText("");
+                jDateFechaEntrega.setDate(new Date());
+                jComboTitularCheque.setSelectedIndex(0);
+                jComboTitularDestino.setSelectedIndex(0);
+                TxtUsoCheque.setText("");
 
             } catch (SQLException ex) {
-                Utilidades.msg(null, "Error al ingresar el Cliente/Proveedor");
+                Utilidades.msg(null, "Error al ingresar el Cheque");
                 this.dispose();
             }
         }
-
-
-    }                                          
-
     }//GEN-LAST:event_btnAgregarChequeActionPerformed
 
     /**
