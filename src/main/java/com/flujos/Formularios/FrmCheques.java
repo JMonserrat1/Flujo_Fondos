@@ -1,10 +1,11 @@
+package com.flujos.Formularios;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.flujos.Formularios;
-
 import com.flujos.DAOs.DAOCheque;
+import com.flujos.Entidades.Cheque;
 import com.flujos.Utilidades.Conexion;
 import com.flujos.Utilidades.Utilidades;
 import java.util.Date;
@@ -32,12 +33,12 @@ public class FrmCheques extends javax.swing.JFrame {
         TxtNumero.setText("");
         TxtImporteCheque.setText("");
         jDateFechaCobro.setDate(new Date());
-        TxtTipoCheque.setText("");
+        jComboTipoCheque.setSelectedIndex(0);
         jComboEstadoCheque.setSelectedIndex(0);
         TxtObservacionCheque.setText("");
         jDateFechaEntrega.setDate(new Date());
-        TxtTitularCheque.setText("");
-        TxtTitularDestino.setText("");
+        jComboTitularCheque.setSelectedIndex(0);
+        jComboTitularDestino.setSelectedIndex(0);
         TxtUsoCheque.setText("");
                 
     }
@@ -59,16 +60,13 @@ public class FrmCheques extends javax.swing.JFrame {
         lblImporteCheque = new javax.swing.JLabel();
         TxtImporteCheque = new javax.swing.JTextField();
         lblTipoCheque = new javax.swing.JLabel();
-        TxtTipoCheque = new javax.swing.JTextField();
         lblEstadoDeCheque = new javax.swing.JLabel();
         lblObservacionCheque = new javax.swing.JLabel();
         TxtObservacionCheque = new javax.swing.JTextField();
         lblFechaEntrega = new javax.swing.JLabel();
         lblFechaCobro = new javax.swing.JLabel();
-        TxtTitularCheque = new javax.swing.JTextField();
         lblTitularCheque = new javax.swing.JLabel();
         lblTitularDestino = new javax.swing.JLabel();
-        TxtTitularDestino = new javax.swing.JTextField();
         lblUsoCheque = new javax.swing.JLabel();
         TxtUsoCheque = new javax.swing.JTextField();
         jDateFechaCobro = new com.toedter.calendar.JDateChooser();
@@ -78,8 +76,11 @@ public class FrmCheques extends javax.swing.JFrame {
         btnEliminarCheque = new javax.swing.JButton();
         btnLimpiarCheque = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        txtNumeroCheque = new javax.swing.JTextField();
+        TxtIdCheque = new javax.swing.JTextField();
         jComboEstadoCheque = new javax.swing.JComboBox<>();
+        jComboTipoCheque = new javax.swing.JComboBox<>();
+        jComboTitularDestino = new javax.swing.JComboBox<>();
+        jComboTitularCheque = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,110 +121,140 @@ public class FrmCheques extends javax.swing.JFrame {
 
         jComboEstadoCheque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "Cobrado", "Por cobrar" }));
 
+        jComboTipoCheque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "Propio", "Terceros" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(288, 288, 288)
+                        .addComponent(jButton1)
+                        .addGap(172, 172, 172)
+                        .addComponent(TxtIdCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(lblNumCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(TxtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(lblImporteCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(TxtImporteCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(lblFechaCobro, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(jDateFechaCobro, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(lblTipoCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(jComboTipoCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(lblEstadoDeCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(jComboEstadoCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(lblObservacionCheque)
+                        .addGap(71, 71, 71)
+                        .addComponent(TxtObservacionCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(lblTitularDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(jComboTitularDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(lblUsoCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)
+                        .addComponent(TxtUsoCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(btnAgregarCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(btnModificarCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(btnEliminarCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLimpiarCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(6, 6, 6)
+                        .addComponent(btnLimpiarCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblUsoCheque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblTitularDestino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblFechaCobro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblFechaEntrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblEstadoDeCheque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblImporteCheque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblNumCheque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblTipoCheque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblObservacionCheque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblTitularCheque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(71, 71, 71)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TxtTitularCheque, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                                    .addComponent(TxtImporteCheque)
-                                    .addComponent(TxtNumero)
-                                    .addComponent(TxtTipoCheque)
-                                    .addComponent(TxtObservacionCheque)
-                                    .addComponent(TxtTitularDestino)
-                                    .addComponent(TxtUsoCheque)
-                                    .addComponent(jDateFechaCobro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDateFechaEntrega, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboEstadoCheque, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(130, 130, 130))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(172, 172, 172)
-                                .addComponent(txtNumeroCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33))))))
+                            .addComponent(lblFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTitularCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(71, 71, 71)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jDateFechaEntrega, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                            .addComponent(jComboTitularCheque, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
-                    .addComponent(txtNumeroCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtIdCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNumCheque))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(lblNumCheque))
+                    .addComponent(TxtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblImporteCheque)
                     .addComponent(TxtImporteCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblFechaCobro)
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblFechaCobro))
                     .addComponent(jDateFechaCobro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTipoCheque)
-                    .addComponent(TxtTipoCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEstadoDeCheque)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(lblTipoCheque))
+                    .addComponent(jComboTipoCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(lblEstadoDeCheque))
                     .addComponent(jComboEstadoCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblObservacionCheque)
                     .addComponent(TxtObservacionCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblFechaEntrega)
                     .addComponent(jDateFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtTitularCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboTitularCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTitularCheque))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTitularDestino)
-                    .addComponent(TxtTitularDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jComboTitularDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblUsoCheque)
                     .addComponent(TxtUsoCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregarCheque)
                     .addComponent(btnModificarCheque)
                     .addComponent(btnEliminarCheque)
-                    .addComponent(btnLimpiarCheque))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(btnLimpiarCheque)))
         );
 
         pack();
@@ -248,35 +279,47 @@ public class FrmCheques extends javax.swing.JFrame {
             return;
         }
 
-        if (TxtTipoCheque.getText().equals("")) {
+        if (jComboTipoCheque.getSelectedItem().equals("--")) {
             Utilidades.msg(null, "El tipo de cheque no puede estar vacio");
-            TxtTipoCheque.requestFocus();
+            jComboTipoCheque.requestFocus();
             return;
         }
+
         if (jComboEstadoCheque.getSelectedItem().equals("--")) {
             Utilidades.msg(null, "El estado del cheque no puede estar vacio");
             jComboEstadoCheque.requestFocus();
             return;
         }
 
-        if (Utilidades.existe(con.getConexion(), "SELECT (1) FROM cheque WHERE nro_cheque = '" + numCheque.getText() + "' ")) {
-            Utilidades.msg(null, "No se puede ingresar porque el DNI/CUIT ya existe");
-            txtNombre.setText("");
-            txtDNI.setText("");
-            txtEmail.setText("");
-            txtTelefono.setText("");
-            comboTipoCliente.setSelectedIndex(0);
+        if (Utilidades.existe(con.getConexion(), "SELECT (1) FROM cheque WHERE nro_cheque = " + Integer.parseInt(TxtNumero.getText())  + " ")) {
+            Utilidades.msg(null, "No se puede ingresar porque el numero de cheque ya existe");
+            TxtNumero.setText("");
+            TxtIdCheque.setText("");
+            TxtImporteCheque.setText("");
+            jComboTipoCheque.setSelectedIndex(0);
+            jComboEstadoCheque.setSelectedIndex(0);
+            TxtObservacionCheque.setText("");
+            jComboTitularCheque.setSelectedIndex(0);
+            jComboTitularDestino.setSelectedIndex(0);
+            TxtUsoCheque.setText("");
+            jDateFechaCobro.setDate(new Date());
+            jDateFechaEntrega.setDate(new Date());
 
         } else {
             try {
-                ClienteProveedor cliente = new ClienteProveedor();
-                cliente.setNomRazonSocial(txtNombre.getText());
-                cliente.setDniCuit(Integer.valueOf(txtDNI.getText()));
-                cliente.setTelefono(txtTelefono.getText());
-                cliente.setEmail(txtEmail.getText());
-                cliente.setTipoClienteProveedor(comboTipoCliente.getSelectedItem().toString());
+                Cheque cheque = new Cheque();
+                cheque.setEstadoCheque(jComboEstadoCheque.getSelectedItem().equals("Cobrado") ? 1 : 0);
+                cheque.setFechaCobroCheque(jDateFechaCobro.getDate());
+                cheque.setTipoCheque(jComboTipoCheque.getSelectedItem().toString());
+                cheque.setFechaEntregaCheque(jDateFechaEntrega.getDate());
+                cheque.setImporteCheque(new BigDecimal(TxtImporteCheque.getText()));
+                cheque.setNumCheque(Integer.parseInt(TxtNumero.getText()));
+                cheque.setObservacionCheque(TxtObservacionCheque.getText());
+                //cheque.setTitularCheque(Long.parseLong(TxtTitularCheque.getText()));
+                //cheque.setTitularDestino(Long.parseLong(TxtTitularDestino.getText()));
+                cheque.setUsoCheque(TxtUsoCheque.getText());
+                
                 daoClienteProveedor.ingresarClienteProveedor(cliente, con.getConexion());
-
                 Utilidades.msg(null, "Cliente/Proveedor ingresado correctamente");
                 txtNombre.setText("");
                 txtDNI.setText("");
@@ -331,12 +374,10 @@ public class FrmCheques extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TxtIdCheque;
     private javax.swing.JTextField TxtImporteCheque;
     private javax.swing.JTextField TxtNumero;
     private javax.swing.JTextField TxtObservacionCheque;
-    private javax.swing.JTextField TxtTipoCheque;
-    private javax.swing.JTextField TxtTitularCheque;
-    private javax.swing.JTextField TxtTitularDestino;
     private javax.swing.JTextField TxtUsoCheque;
     private javax.swing.JButton btnAgregarCheque;
     private javax.swing.JButton btnEliminarCheque;
@@ -344,6 +385,9 @@ public class FrmCheques extends javax.swing.JFrame {
     private javax.swing.JButton btnModificarCheque;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboEstadoCheque;
+    private javax.swing.JComboBox<String> jComboTipoCheque;
+    private javax.swing.JComboBox<String> jComboTitularCheque;
+    private javax.swing.JComboBox<String> jComboTitularDestino;
     private com.toedter.calendar.JDateChooser jDateFechaCobro;
     private com.toedter.calendar.JDateChooser jDateFechaEntrega;
     private javax.swing.JLabel lblEstadoDeCheque;
@@ -356,6 +400,5 @@ public class FrmCheques extends javax.swing.JFrame {
     private javax.swing.JLabel lblTitularCheque;
     private javax.swing.JLabel lblTitularDestino;
     private javax.swing.JLabel lblUsoCheque;
-    private javax.swing.JTextField txtNumeroCheque;
     // End of variables declaration//GEN-END:variables
 }
