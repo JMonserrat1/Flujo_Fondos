@@ -4,6 +4,7 @@
  */
 package com.flujos.Utilidades;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,4 +45,14 @@ public class Utilidades {
             return false;
         }
     }
+    
+    public static boolean isValidBigDecimal(String cadena) {
+    try {
+        new BigDecimal(cadena);  // Trata de convertir la cadena a BigDecimal
+        return true;
+    } catch (NumberFormatException nfe) {
+        return false;  // Si ocurre una excepción, la cadena no es válida
+    }
+}
+
 }
