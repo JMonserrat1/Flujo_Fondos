@@ -33,11 +33,11 @@ public class FrmCheques extends javax.swing.JFrame {
 
         TxtNumero.setText("");
         TxtImporteCheque.setText("");
-        jDateFechaCobro.setDate(new Date());
+        jDateFechaCobro.setDate(null);
         jComboTipoCheque.setSelectedIndex(0);
         jComboEstadoCheque.setSelectedIndex(0);
         TxtObservacionCheque.setText("");
-        jDateFechaEntrega.setDate(new Date());
+        jDateFechaEntrega.setDate(null);
         jComboTitularCheque.setSelectedIndex(0);
         jComboTitularDestino.setSelectedIndex(0);
         TxtUsoCheque.setText("");
@@ -337,8 +337,8 @@ public class FrmCheques extends javax.swing.JFrame {
             jComboTitularCheque.setSelectedIndex(0);
             jComboTitularDestino.setSelectedIndex(0);
             TxtUsoCheque.setText("");
-            jDateFechaCobro.setDate(new Date());
-            jDateFechaEntrega.setDate(new Date());
+            jDateFechaCobro.setDate(null);
+            jDateFechaEntrega.setDate(null);
 
         } else {
             try {
@@ -358,11 +358,11 @@ public class FrmCheques extends javax.swing.JFrame {
                 Utilidades.msg(null, "Cheque ingresado correctamente");
                 TxtNumero.setText("");
                 TxtImporteCheque.setText("");
-                jDateFechaCobro.setDate(new Date());
+                jDateFechaCobro.setDate(null);
                 jComboTipoCheque.setSelectedIndex(0);
                 jComboEstadoCheque.setSelectedIndex(0);
                 TxtObservacionCheque.setText("");
-                jDateFechaEntrega.setDate(new Date());
+                jDateFechaEntrega.setDate(null);
                 jComboTitularCheque.setSelectedIndex(0);
                 jComboTitularDestino.setSelectedIndex(0);
                 TxtUsoCheque.setText("");
