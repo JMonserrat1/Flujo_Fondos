@@ -52,6 +52,11 @@ public class FrmFlujoFondos extends javax.swing.JFrame {
 
         menuItemABMMovimiento.setText("Movimiento");
         menuItemABMMovimiento.setActionCommand("");
+        menuItemABMMovimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemABMMovimientoActionPerformed(evt);
+            }
+        });
         jMenu2.add(menuItemABMMovimiento);
 
         menuItemCheque.setText("Cheque");
@@ -95,6 +100,12 @@ public class FrmFlujoFondos extends javax.swing.JFrame {
         menuCheque.setVisible(true);
         menuCheque.setLocationRelativeTo(null);
     }//GEN-LAST:event_menuItemChequeActionPerformed
+
+    private void menuItemABMMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemABMMovimientoActionPerformed
+        FrmABMMovimiento menuMovimiento = new FrmABMMovimiento();
+        menuMovimiento.setVisible(true);
+        menuMovimiento.setLocationRelativeTo(null);
+    }//GEN-LAST:event_menuItemABMMovimientoActionPerformed
 
     /**
      * @param args the command line arguments

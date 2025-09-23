@@ -19,7 +19,6 @@ public class FrmABMMovimiento extends javax.swing.JFrame {
 
     private Conexion con;
     private DAOMovimiento daoMovimiento;
-    private String string;
     private Movimiento Movimiento;
 
     /**
