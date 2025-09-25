@@ -36,6 +36,7 @@ public class FrmABMMovimiento extends javax.swing.JFrame {
             btnModificar.setEnabled(false);
             btnEliminar.setEnabled(false);
             btnLimpiar.setEnabled(true);
+            txtIdMovimiento.setVisible(false);
 
             daoMovimiento = new DAOMovimiento();
             con = new Conexion();
@@ -105,6 +106,9 @@ public class FrmABMMovimiento extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
+
+        txtIdMovimiento.setEditable(false);
+        txtIdMovimiento.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -179,7 +183,8 @@ public class FrmABMMovimiento extends javax.swing.JFrame {
             Movimiento movimiento = daoMovimiento.obtenerDatos(dato, con.getConexion());
 
             if (movimiento != null) {
-                txtDescripcion.setText(String.valueOf(movimiento.getDescripcionMovimiento()));
+                txtIdMovimiento.setText(String.valueOf(movimiento.getIdMovimiento()));
+                txtDescripcion.setText(movimiento.getDescripcionMovimiento());
 
             } else {
                 Utilidades.msg(null, "No existe ese movimiento o se produjo un error");
@@ -218,7 +223,7 @@ public class FrmABMMovimiento extends javax.swing.JFrame {
             try {
                 Movimiento movimiento = new Movimiento();
                 movimiento.setDescripcionMovimiento(txtDescripcion.getText());
-                daoMovimiento.ingresarMovimiento(Movimiento, con.getConexion());
+                daoMovimiento.ingresarMovimiento(movimiento, con.getConexion());
 
                 Utilidades.msg(null, "Descripcion de movimiento ingresado correctamente");
                 txtDescripcion.setText("");
@@ -243,7 +248,7 @@ public class FrmABMMovimiento extends javax.swing.JFrame {
 
             Movimiento movimiento = new Movimiento();
 
-            movimiento.setIdMovimiento(Long.valueOf(txtIdMovimiento.getText()));
+            movimiento.setIdMovimiento(Long.parseLong(txtIdMovimiento.getText()));
             movimiento.setDescripcionMovimiento(txtDescripcion.getText());
 
             daoMovimiento.actualizar(movimiento, con.getConexion());

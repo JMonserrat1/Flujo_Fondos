@@ -38,7 +38,7 @@ public class DAOMovimiento {
             rs = st.executeQuery(consulta);
 
             if (rs.next()) {
-
+                movimiento.setIdMovimiento(rs.getLong("id_movimiento"));
                 movimiento.setDescripcionMovimiento(rs.getString("desc_movimiento"));
             } else {
 
@@ -72,10 +72,12 @@ public class DAOMovimiento {
         PreparedStatement ps = null;
 
         try {
-            String sqlUpdate = "UPDATE movimiento SET " + "desc_movimiento = ?, ";
+            String sqlUpdate = "UPDATE movimiento SET desc_movimiento = ?"
+                    + " WHERE id_movimiento = ? ";
 
             ps = con.prepareStatement(sqlUpdate);
             ps.setString(1, movimiento.getDescripcionMovimiento());
+            ps.setLong(2, movimiento.getIdMovimiento());
             ps.executeUpdate();
         } finally{
         
